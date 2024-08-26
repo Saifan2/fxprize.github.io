@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>טופס יצירת BB CODE</title>
+    <style>
+        body {
+            direction: rtl;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .inline-label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        input[type="number"], input[type="text"], select {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .inline-input {
+            display: inline-block;
+            width: calc(50% - 10px);
+            padding: 5px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2bb1e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #output {
+            white-space: pre-wrap;
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+        .subNickContainer {
+            background-color: #e6e6e6;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="form-container">
+        <h1>יצירת BB CODE</h1>
+        <form id="bbCodeForm">
+            <label>ימי ווינר</label>
+            <input type="number" id="winnerDays" min="0" value="0">
+            
+            <label>נקודות FXP</label>
+            <input type="number" id="fxpPoints" min="0" value="0">
+            
+            <label>נקודות לצ'אמפ</label>
+            <input type="number" id="champPoints" min="0" value="0">
+            
+            <div id="nicknameChangesContainer">
+                <label>שינוי ניק (תוקף עד)</label>
+                <input type="text" name="nicknameChange" placeholder="XX/XX/XX">
+            </div>
+            <button type="button" onclick="addNicknameChange()">הוסף שינוי ניק</button><br><br>
+
+            <div id="subNickChangesContainer">
+                <div class="subNickContainer">
+                    <label>שינוי תת ניק טקסט/תמונה ל־X ימים</label>
+                    <div>
+                        <input type="number" name="subNickDays" class="inline-input" min="0" value="0">
+                        <select name="subNickType" class="inline-input">
+                            <option value="טקסט">טקסט</option>
+                            <option value="תמונה">תמונה</option>
+                        </select>
+                    </div>
+                    <label>תוקף עד</label>
+                    <input type="text" name="subNickExpiry" placeholder="XX/XX/XX">
+                </div>
+            </div>
+            <button type="button" onclick="addSubNickChange()">הוסף שינוי תת ניק</button>
+            
+            <label>גביעי תהילה</label>
+            <input type="number" id="trophyCount" min="0" value="0">
+            
+            <label>דרגת ה־FXP Gold למשך X ימים</label>
+            <input type="number" id="fxpGoldDays" min="0" value="0">
+            
+            <label>דרגת ה־FXP Glory למשך X ימים</label>
+            <input type="number" id="fxpGloryDays" min="0" value="0">
+            
+            <button type="button" onclick="generateBBCode()">צור</button>
+        </form>
+        
+        <h2>קוד BB CODE שנוצר:</h2>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        function addNicknameChange() {
+            const nicknameChangesContainer = document.getElementById('nicknameChangesContainer');
+            const newField = document.createElement('div');
+            newField.innerHTML = `
+                <label>שינוי ניק (תוקף עד)</label>
+                <input type="text" name="nicknameChange" placeholder="XX/XX/XX">
+            `;
+            nicknameChangesContainer.appendChild(newField);
+        }
+
+        function addSubNickChange() {
+            const subNickChangesContainer = document.getElementById('subNickChangesContainer');
+            const newSubNickField = document.createElement('div');
+            newSubNickField.className = 'subNickContainer';
+            newSubNickField.innerHTML = `
+                <label>שינוי תת ניק טקסט/תמונה ל־X ימים</label>
+                <div>
+                    <input type="number" name="subNickDays" class="inline-input" min="0" value="0">
+                    <select name="subNickType" class="inline-input">
+                        <option value="טקסט">טקסט</option>
+                        <option value="תמונה">תמונה</option>
+                    </select>
+                </div>
+                <label>תוקף עד</label>
+                <input type="text" name="subNickExpiry" placeholder="XX/XX/XX">
+            `;
+            subNickChangesContainer.appendChild(newSubNickField);
+        }
+
+        function generateBBCode() {
+            let output = "[B]\n";
+            
+            let winnerDays = document.getElementById("winnerDays").value;
+            let fxpPoints = document.getElementById("fxpPoints").value;
+            let champPoints = document.getElementById("champPoints").value;
+            let nicknameChanges = document.getElementsByName("nicknameChange");
+            let subNickDays = document.getElementsByName("subNickDays");
+            let subNickType = document.getElementsByName("subNickType");
+            let subNickExpiry = document.getElementsByName("subNickExpiry");
+            let trophyCount = document.getElementById("trophyCount").value;
+            let fxpGoldDays = document.getElementById("fxpGoldDays").value;
+            let fxpGloryDays = document.getElementById("fxpGloryDays").value;
+            
+            if (winnerDays > 0) output += `[COLOR=#2bb1e2]${winnerDays} ימי ווינר[/COLOR]\n`;
+            if (fxpPoints > 0) output += `[COLOR=yellowgreen]${fxpPoints} נקודות FXP[/COLOR]\n`;
+            if (champPoints > 0) output += `[COLOR=#daa520]${champPoints} נקודות לצ'אמפ[/COLOR]\n`;
+            nicknameChanges.forEach(function(nicknameChange) {
+                if (nicknameChange.value) output += `[COLOR=#000080]שינוי ניק (בתוקף עד ${nicknameChange.value})[/COLOR]\n`;
+            });
+            for (let i = 0; i < subNickDays.length; i++) {
+                if (subNickDays[i].value > 0 && subNickExpiry[i].value) {
+                    output += `[COLOR=#ff0000]שינוי תת ניק ${subNickType[i].value} ל־${subNickDays[i].value} ימים (בתוקף עד ${subNickExpiry[i].value})[/COLOR]\n`;
+                }
+            }
+            if (trophyCount > 0) output += `[COLOR=#43c6db]${trophyCount} גביעי תהילה[/COLOR]\n`;
+            if (fxpGoldDays > 0) output += `[COLOR=#DAA520]דרגת ה־FXP Gold למשך ${fxpGoldDays} ימים[/COLOR]\n`;
+            if (fxpGloryDays > 0) output += `[COLOR=#008B8B]דרגת ה־FXP Glory למשך ${fxpGloryDays} ימים[/COLOR]\n`;
+
+            output += "[/B]";
+
+            document.getElementById("output").innerText = output;
+        }
+    </script>
+</body>
+</html>
