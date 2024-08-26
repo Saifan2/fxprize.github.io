@@ -14,6 +14,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            box-sizing: border-box;
         }
         #form-container {
             background-color: white;
@@ -21,9 +22,10 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px;
+            max-width: 500px; /* הקטנת רוחב הטבלה */
             margin: 20px;
             box-sizing: border-box;
+            overflow-x: auto; /* מתקן בעיות רוחב */
         }
         label {
             display: block;
@@ -34,7 +36,7 @@
             margin-right: 10px;
         }
         input[type="number"], input[type="text"], select {
-            width: 100%;
+            width: calc(100% - 22px); /* מתקן בעיות רוחב */
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
@@ -43,7 +45,7 @@
         }
         .inline-input {
             display: inline-block;
-            width: calc(50% - 10px);
+            width: calc(48% - 10px); /* מתקן בעיות רוחב */
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
@@ -68,12 +70,31 @@
             margin-top: 20px;
             border-radius: 10px;
             border: 1px solid #ccc;
+            min-height: 100px;
+            overflow-wrap: break-word; /* מונע התפשטות המילים מעבר לגבולות */
         }
         .subNickContainer {
             background-color: #e6e6e6;
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 10px;
+        }
+        #copyButton {
+            background-color: #4CAF50;
+            margin-top: 10px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 600px) {
+            .inline-input {
+                width: calc(100% - 22px); /* מתקן בעיות רוחב */
+            }
+            button {
+                padding: 10px;
+            }
+            #form-container {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -126,6 +147,7 @@
         
         <h2>קוד BB CODE שנוצר:</h2>
         <div id="output"></div>
+        <button id="copyButton" type="button" onclick="copyBBCode()">העתק קוד</button>
     </div>
 
     <script>
@@ -191,5 +213,15 @@
 
             document.getElementById("output").innerText = output;
         }
+
+        function copyBBCode() {
+            const bbCodeOutput = document.getElementById("output").innerText;
+            navigator.clipboard.writeText(bbCodeOutput).then(() => {
+                alert("הקוד הועתק ללוח!");
+            }).catch(err => {
+                console.error('התרחשה שגיאה בהעתקת הקוד: ', err);
+            });
+        }
     </script>
 </body>
+</html>
