@@ -1,7 +1,7 @@
 <html lang="he"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>טופס יצירת BB CODE</title>
+    <title>בדיקת זכאות</title>
     <style>
         body {
             direction: rtl;
@@ -19,10 +19,10 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 500px; /* הקטנת רוחב הטבלה */
+            max-width: 500px; 
             margin: 20px;
             box-sizing: border-box;
-            overflow-x: auto; /* מתקן בעיות רוחב */
+            overflow-x: auto; 
         }
         label {
             display: block;
@@ -33,7 +33,7 @@
             margin-right: 10px;
         }
         input[type="number"], input[type="text"], select {
-            width: calc(100% - 22px); /* מתקן בעיות רוחב */
+            width: calc(100% - 22px); 
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
@@ -42,7 +42,7 @@
         }
         .inline-input {
             display: inline-block;
-            width: calc(48% - 10px); /* מתקן בעיות רוחב */
+            width: calc(48% - 10px); 
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
@@ -68,7 +68,7 @@
             border-radius: 10px;
             border: 1px solid #ccc;
             min-height: 100px;
-            overflow-wrap: break-word; /* מונע התפשטות המילים מעבר לגבולות */
+            overflow-wrap: break-word; 
         }
         .subNickContainer {
             background-color: #e6e6e6;
@@ -84,7 +84,7 @@
         /* Media Queries */
         @media (max-width: 600px) {
             .inline-input {
-                width: calc(100% - 22px); /* מתקן בעיות רוחב */
+                width: calc(100% - 22px); 
             }
             button {
                 padding: 10px;
@@ -110,7 +110,7 @@
             
             <div id="nicknameChangesContainer">
                 <label>תאריך תוקף שינוי ניק (חודשיים מקבלה)</label>
-                <input type="text" name="nicknameChange" placeholder="XX/XX/XX">
+                <input type="date" name="nicknameChange" placeholder="01/09/2024">
             </div>
             <button type="button" onclick="addNicknameChange()">הוסף שינוי ניק</button><br><br>
 
@@ -125,7 +125,7 @@
                         <input type="number" name="subNickDays" class="inline-input" min="0" value="0">
                     </div>
                     <label>תוקף עד</label>
-                    <input type="text" name="subNickExpiry" placeholder="XX/XX/XX">
+                    <input type="date" name="subNickExpiry" placeholder="01/09/2024">
                 </div>
             </div>
             <button type="button" onclick="addSubNickChange()">הוסף שינוי תת ניק</button>
@@ -214,7 +214,7 @@
         function copyBBCode() {
             const bbCodeOutput = document.getElementById("output").innerText;
             navigator.clipboard.writeText(bbCodeOutput).then(() => {
-                alert("הקוד הועתק ללוח!");
+                alert("הקוד הועתק!");
             }).catch(err => {
                 console.error('התרחשה שגיאה בהעתקת הקוד: ', err);
             });
