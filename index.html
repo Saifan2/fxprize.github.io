@@ -20,7 +20,10 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 100%;
+            max-width: 400px;
+            margin: 20px;
+            box-sizing: border-box;
         }
         label {
             display: block;
@@ -32,28 +35,31 @@
         }
         input[type="number"], input[type="text"], select {
             width: 100%;
-            padding: 5px;
+            padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
+            box-sizing: border-box;
         }
         .inline-input {
             display: inline-block;
             width: calc(50% - 10px);
-            padding: 5px;
+            padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
+            box-sizing: border-box;
         }
         button {
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             background-color: #2bb1e2;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
+            box-sizing: border-box;
         }
         #output {
             white-space: pre-wrap;
@@ -88,7 +94,7 @@
                 <label>שינוי ניק (תוקף עד)</label>
                 <input type="text" name="nicknameChange" placeholder="XX/XX/XX">
             </div>
-            <button type="button" onclick="addNicknameChange()">הוסף שינוי ניק</button><br><br>
+            <button type="button" onclick="addNicknameChange()">הוסף שינוי ניק</button>
 
             <div id="subNickChangesContainer">
                 <div class="subNickContainer">
@@ -187,4 +193,3 @@
         }
     </script>
 </body>
-</html>
