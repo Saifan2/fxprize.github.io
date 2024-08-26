@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="he">
-<head>
+<html lang="he"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>טופס יצירת BB CODE</title>
@@ -99,7 +97,7 @@
 </head>
 <body>
     <div id="form-container">
-        <h1>יצירת BB CODE</h1>
+        <h1>בדיקת זכאות</h1>
         <form id="bbCodeForm">
             <label>ימי ווינר</label>
             <input type="number" id="winnerDays" min="0" value="0">
@@ -111,20 +109,20 @@
             <input type="number" id="champPoints" min="0" value="0">
             
             <div id="nicknameChangesContainer">
-                <label>שינוי ניק (תוקף עד)</label>
+                <label>תאריך תוקף שינוי ניק (חודשיים מקבלה)</label>
                 <input type="text" name="nicknameChange" placeholder="XX/XX/XX">
             </div>
-            <button type="button" onclick="addNicknameChange()">הוסף שינוי ניק</button>
+            <button type="button" onclick="addNicknameChange()">הוסף שינוי ניק</button><br><br>
 
             <div id="subNickChangesContainer">
                 <div class="subNickContainer">
                     <label>שינוי תת ניק טקסט/תמונה ל־X ימים</label>
                     <div>
-                        <input type="number" name="subNickDays" class="inline-input" min="0" value="0">
                         <select name="subNickType" class="inline-input">
                             <option value="טקסט">טקסט</option>
                             <option value="תמונה">תמונה</option>
                         </select>
+                        <input type="number" name="subNickDays" class="inline-input" min="0" value="0">
                     </div>
                     <label>תוקף עד</label>
                     <input type="text" name="subNickExpiry" placeholder="XX/XX/XX">
@@ -135,16 +133,16 @@
             <label>גביעי תהילה</label>
             <input type="number" id="trophyCount" min="0" value="0">
             
-            <label>דרגת ה־FXP Gold למשך X ימים</label>
+            <label>מספר ימי דרגה FXP Gold</label>
             <input type="number" id="fxpGoldDays" min="0" value="0">
             
-            <label>דרגת ה־FXP Glory למשך X ימים</label>
+            <label>מספר ימי דרגת FXP Glory</label>
             <input type="number" id="fxpGloryDays" min="0" value="0">
             
             <button type="button" onclick="generateBBCode()">צור</button>
         </form>
         
-        <h2>קוד BB CODE שנוצר:</h2>
+        <h2>בדיקת הזכאות:</h2>
         <div id="output"></div>
         <button id="copyButton" type="button" onclick="copyBBCode()">העתק קוד</button>
     </div>
@@ -222,5 +220,6 @@
             });
         }
     </script>
-</body>
-</html>
+
+
+</body></html>
