@@ -124,7 +124,7 @@
                         </select>
                         <input type="number" name="subNickDays" class="inline-input" min="0" value="0">
                     </div>
-                    <label>תוקף עד</label>
+                    <label>תוקף עד חודש מקבלת הפרס</label>
                     <input type="date" name="subNickExpiry" placeholder="01/09/2024">
                 </div>
             </div>
@@ -153,7 +153,7 @@
             const newField = document.createElement('div');
             newField.innerHTML = `
                 <label>שינוי ניק (תוקף עד)</label>
-                <input type="text" name="nicknameChange" placeholder="XX/XX/XX">
+                <input type="date" name="nicknameChange" placeholder="XX/XX/XX">
             `;
             nicknameChangesContainer.appendChild(newField);
         }
@@ -165,14 +165,14 @@
             newSubNickField.innerHTML = `
                 <label>שינוי תת ניק טקסט/תמונה ל־X ימים</label>
                 <div>
-                    <input type="number" name="subNickDays" class="inline-input" min="0" value="0">
                     <select name="subNickType" class="inline-input">
                         <option value="טקסט">טקסט</option>
                         <option value="תמונה">תמונה</option>
                     </select>
+                    <input type="number" name="subNickDays" class="inline-input" min="0" value="0">
                 </div>
-                <label>תוקף עד</label>
-                <input type="text" name="subNickExpiry" placeholder="XX/XX/XX">
+                <label>תוקף עד חודש מקבלת הפרס</label>
+                <input type="date" name="subNickExpiry" placeholder="XX/XX/XX">
             `;
             subNickChangesContainer.appendChild(newSubNickField);
         }
